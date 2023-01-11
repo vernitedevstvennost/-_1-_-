@@ -1,0 +1,63 @@
+import math
+
+while True:
+    try:
+        a = float(input("Введите значени a ="))
+        b = float(input("Введите значение b ="))
+        if b - a < 0: # вывод исключений
+            raise Exception # Инструкция raise, принудительно поднимает указанное исключение.
+        if (b - a) / 2 <= 1 and (b - a) / 2 <= 0.0001:
+            raise ArithmeticError
+        break
+    except ArithmeticError: # исключение
+        print("шаг(h) должен находиться в диапозоне от 0.0001 до 1")
+    except Exception:
+        print("b не может быть меньше a")
+
+
+summ2 = 0
+summ4 = 0
+A = a
+B = b
+for n in 2, 4:
+    a = A
+    b = B
+    summ_nechet = 0  # сумма элементов с нечетным индексом
+    summ_chet = 0  # сумма элементов с чётным индексом
+    summ_ob = 0  # сумма первого и последнего элемента
+    elem = 0
+    index = 0  # индекс элемента
+    h = (b - a) / n  # шаг
+    col_index = ((b - a) / h)  # кол-во индексов нужно для того что определить последний элемент
+    while a <= b:
+        elem = 1 / (1 + pow(a, 2))
+        if index == 0 or col_index - 1 < 0:
+            summ_ob += elem
+            a += h
+            # print(elem) # можно выводить каждый элемент
+            index += 1
+        elif index % 2 != 0:
+            summ_nechet = summ_nechet + elem
+            a = a + h
+            # print(elem) # можно выводить каждый элемент
+            index += 1
+        elif index % 2 == 0:
+            summ_chet += elem
+            a += h
+            # print(elem) # можно выводить каждый элемент
+            index += 1
+        col_index -= 1  # уменьшаем кол-во на 1-цу после каждой итерации для того что бы определить последний элемент
+    if n == 2:
+        summ2 = (h / 3) * (
+                summ_ob + summ_chet * 2 + summ_nechet * 4)  # все четные элементы * 2, а нечётные * 4, кроме 1 и последнего
+    if n == 4:
+        summ4 = (h / 3) * (summ_ob + summ_chet * 2 + summ_nechet * 4)
+
+
+
+
+print("%.5f" % summ2)
+print("%.5f" % summ4)
+
+# 1 / (1 + pow(a, 2))
+# math.sqrt(1 + (2 * pow(a, 2)) - pow(a, 3))
