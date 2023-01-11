@@ -1,0 +1,24 @@
+import math
+
+x = int(input("Введите число x = "))
+e = float(input("Введите чилсо e = "))
+fac = 1
+step = 1
+summ = 0
+chet = 1
+if e <= 0.1 and e >= 0.0001:
+    while pow(x, step) / math.factorial(fac) > e:
+        if chet == 1:
+            summ = summ + pow(x, step) / math.factorial(fac)
+            chet = 2
+            step = step + 2
+            fac = fac + 2
+            print(summ)
+        else:
+            summ = summ - pow(x, step) / math.factorial(fac)
+            chet = 1
+            step = step + 2
+            fac = fac + 2
+            print(summ)
+else:
+    print("не корректные данные ")
