@@ -1,0 +1,8 @@
+x = int(input("Введите число"))
+if x >= 100:
+    x = x // 100
+    x = x % 10
+else:
+    print("не коректное число")
+    exit()
+print(x)
